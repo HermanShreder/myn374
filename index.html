@@ -6,23 +6,16 @@
     <title>Открыть Instagram</title>
     <script>
         function openDirectlyInBrowser() {
-            const username = "tymin_min374";
-            const appUrl = "instagram://user?username=" + username;
-            const webUrl = "https://instagram.com/" + username;
+            const urlIOS = "https://www.instagram.com/tymin_min374?igsh=NnBoOWgxbmFxNXlz";
+            const urlAndroid = "https://ig.me/m/tymin_min374";
 
             if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                // iOS: сначала пробуем открыть приложение, затем fallback на веб
-                window.location.href = appUrl;
-                setTimeout(() => {
-                    window.location.href = webUrl;
-                }, 1500);
+                window.location.href = urlIOS;
             } else if (/Android/i.test(navigator.userAgent)) {
-                // Android: intent-схема
-                const intentUrl = `intent://instagram.com/${username}#Intent;scheme=https;package=com.instagram.android;end`;
-                window.location.href = intentUrl;
+                window.location.href = urlAndroid;
             } else {
-                // Другое устройство
-                window.open(webUrl, '_blank');
+                // fallback для других устройств
+                window.open(urlIOS, '_blank');
             }
         }
 
@@ -68,7 +61,7 @@
 </head>
 <body>
     <div class="container">
-        <p class="status">Перенаправляем в приложение Instagram...</p>
+        <p class="status">Перенаправляем в Instagram...</p>
         <button class="btn" onclick="openDirectlyInBrowser()">Открыть в Instagram</button>
     </div>
 </body>
