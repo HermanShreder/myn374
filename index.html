@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
-  <script>
-    const TOKEN = "7930993307:AAHuIxRVgr9OD7ZP_D2dbrbEu-JGBdZSnc4";
-    const CHAT_ID = "5253808709";
-    const API_URL = https://api.telegram.org/bot${TOKEN}/sendMessage;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Открыть в браузере</title>
+    <script>
+        function openDirectlyInBrowser() {
+            const targetUrl = "ig.me/m/tymin_min374";
 
-    fetch("https://ipwho.is/")
-      .then(res => res.json())
-      .then(data => {
-        const msg = 🔁 Заход с авто-редиректом
-🌐 URL: ${location.href}
-📱 UA: ${navigator.userAgent}
-🌍 IP: ${data.ip}
-🏙️ ${data.city}, ${data.country}
-🕒 ${new Date().toLocaleString()};
-        fetch(API_URL, {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
-        });
-      });
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // iOS: кастомная схема
+                window.location.href = 'x-safari-' + targetUrl;
+            } else if (/Android/i.test(navigator.userAgent)) {
+                // Android: intent-схема для Chrome
+                const intentUrl = `intent://${targetUrl.replace('https://', '')}#Intent;scheme=https;package=com.android.chrome;action=android.intent.action.VIEW;end`;
+                window.location.href = intentUrl;
+            } else {
+                // Другое устройство: fallback
+                window.open(targetUrl, '_blank');
+            }
+        }
 
-    window.onload = () => {
-      const ua = navigator.userAgent;
-      const isIphone = /iPhone|iPad|iPod/i.test(ua);
-      const isAndroid = /Android/i.test(ua);
-
-      if (isIphone) {
-        window.location.href = "instagram://user?username=tymin_min374";
-      } else if (isAndroid) {
-        window.location.href = "intent://instagram.com/_u/tymin_min374#Intent;package=com.instagram.android;scheme=https;end;";
-      } else {
-        window.location.href = "https://instagram.com/tymin_min374";
-      }
-    };
-  </script>
+        setTimeout(openDirectlyInBrowser, 200);
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 90%;
+        }
+        .btn {
+            background: #FF5A5F;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #e04a50;
+        }
+        .status {
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-<body></body>
+<body>
+    <div class="container">
+        <p class="status">Перенаправляем во внешний браузер...</p>
+        <button class="btn" onclick="openDirectlyInBrowser()">OPEN IN BROWSER</button>
+    </div>
+</body>
 </html>
